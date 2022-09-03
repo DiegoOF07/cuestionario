@@ -6,7 +6,6 @@ export function App() {
 
   return (
     <>
-      <h1>Cuestionario</h1>
       <Formulario/>
     </>
   )
