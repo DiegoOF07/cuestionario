@@ -86,8 +86,8 @@
     display: block;
     border-radius: 30px;
     border: 2px solid #222;
-    padding: 8px 20px;
-    margin: 5px auto;
-    width: 85%;
-    font-size: 0.95rem;
+    padding: 10px 20px;
+    margin: 15px auto;
+    width: 75%;
+    font-size: 1rem;
 }

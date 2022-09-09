@@ -1,7 +1,7 @@
 import { useState } from "react"
 import './form.modules.css'
 
-export const Formulario = ({setAnswers}) => {
+export const Formulario = ({setAnswers,setError}) => {
     const [page, setPage] = useState(1);
     const [firstValue, setFirstValue] = useState('');
     const [secondValue, setSecondValue] = useState('');
@@ -20,7 +20,7 @@ export const Formulario = ({setAnswers}) => {
     const [fifteenthValue, setFifteenthValue] = useState('');
 
     const firstQuestion = ({ target }) => {
-        setFirstValue(target.value.trim());
+        setFirstValue(target.value);
     };
     const secondQuestion = ({ target }) => {
         setSecondValue(target.value);
@@ -77,24 +77,28 @@ export const Formulario = ({setAnswers}) => {
 
     const submit = (e) => {
         e.preventDefault();
-        let valores = [
-            firstValue,
-            secondValue,
-            thirdValue,
-            fourthValue,
-            fifthValue,
-            sixthValue,
-            seventhValue,
-            eighthValue,
-            ninthValue,
-            tenthValue,
-            eleventhValue,
-            twelfthValue,
-            thirteenthValue,
-            fourteenthValue,
-            fifteenthValue,
-        ];
-        setAnswers(valores);
+        if(firstValue!=='' || fourteenthValue!=='' || !fifteenthValue!==''){
+            let valores = [
+                firstValue.trim(),
+                secondValue,
+                thirdValue,
+                fourthValue,
+                fifthValue,
+                sixthValue,
+                seventhValue,
+                eighthValue,
+                ninthValue,
+                tenthValue,
+                eleventhValue,
+                twelfthValue,
+                thirteenthValue,
+                fourteenthValue.trim(),
+                fifteenthValue.trim(),
+            ];
+            setAnswers(valores);
+        }else{
+            setError('Por favor, no deje preguntas en blanco')
+        }
     };
 
     return (
@@ -106,7 +110,7 @@ export const Formulario = ({setAnswers}) => {
                         <div className={'questionSpace'}>
                             <h3 className={'title'}>Acerca de ti</h3>
                             <p className={'question'}>¿Cual es tu nombre?</p>
-                            <input type="text" onChange={(e)=>firstQuestion(e)} className={'textSpace'} placeholder='Escribe tu nombre' />
+                            <input type="text" value={firstValue} onChange={(e)=>firstQuestion(e)} className={'textSpace'} placeholder='Escribe tu nombre' />
                             <p className={'question'}>¿Cual es tu genero?</p>
                             <div className={'questionOptions'} >
                                 Masculino<input type="radio" name="genero" value="Masculino" onChange={(e) => secondQuestion(e)} />
@@ -198,26 +202,15 @@ export const Formulario = ({setAnswers}) => {
                     }
                     {page === 5 ?
                         <div className={'questionSpace'}>
-                            <p className={'question'}>¿Cual es tu framework favorito?</p>
+                            <p className={'question'}>¿Te gusta escuchar musica mientras trabajas?</p>
                             <div className={'questionOptions'} >
-                                React<input type="radio" name="framework" value="react" onChange={(e) => thirteenthQuestion(e)} />
-                                Angular<input type="radio" name="framework" value="angular" onChange={(e) => thirteenthQuestion(e)} />
-                                Vue<input type="radio" name="framework" value="vue" onChange={(e) => thirteenthQuestion(e)} />
+                                Si<input type="radio" name="trabajas" value="Si" onChange={(e) => thirteenthQuestion(e)} />
+                                No<input type="radio" name="trabajas" value="No" onChange={(e) => thirteenthQuestion(e)} />
                             </div>
-                            <p className={'question'}>¿Cual es el lenguaje que mas te gusta?</p>
-                            <div className={'questionOptions'} >
-                                Java<input type="radio" name="lenguaje" value="java" onChange={(e) => fourteenthQuestion(e)} />
-                                Javascript<input type="radio" name="lenguaje" value="javascript" onChange={(e) => fourteenthQuestion(e)} />
-                                Python<input type="radio" name="lenguaje" value="python" onChange={(e) => fourteenthQuestion(e)} />
-                                C++<input type="radio" name="lenguaje" value="c++" onChange={(e) => fourteenthQuestion(e)} />
-                            </div>
-                            <p className={'question'}>¿Cual es tu sistema operativo?</p>
-                            <div className={'questionOptions'} >
-                                MacOS<input type="radio" name="sistema" value="macOS" onChange={(e) => fifteenthQuestion(e)} />
-                                Windows<input type="radio" name="sistema" value="windows" onChange={(e) => fifteenthQuestion(e)} />
-                                Linux<input type="radio" name="sistema" value="linux" onChange={(e) => fifteenthQuestion(e)} />
-                                Android<input type="radio" name="sistema" value="android" onChange={(e) => fifteenthQuestion(e)} />
-                            </div>
+                            <p className={'question'}>¿Cual es el genero musical que mas te gusta?</p>
+                                <input type="text" value={fourteenthValue} onChange={(e) => fourteenthQuestion(e)} className={'textSpace'}  placeholder='Escribe el nombre de tu genero favorito'/>
+                            <p className={'question'}>¿Cual es tu artista favorito?</p>
+                                <input type="text" value={fifteenthValue} onChange={(e) => fifteenthQuestion(e)} className={'textSpace'} placeholder='Escribe el nombre de tu artista favorito'/>
                             <h3 className={'pageNumber'}>Pagina 5</h3>
                         </div>
                         : null
