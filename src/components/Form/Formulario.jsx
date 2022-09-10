@@ -77,7 +77,9 @@ export const Formulario = ({setAnswers,setError}) => {
 
     const submit = (e) => {
         e.preventDefault();
-        if(firstValue!=='' || fourteenthValue!=='' || !fifteenthValue!==''){
+        if(firstValue==='' || fourteenthValue==='' || fifteenthValue===''){
+            setError('Por favor, no deje preguntas en blanco');
+        }else{
             let valores = [
                 firstValue.trim(),
                 secondValue,
@@ -96,8 +98,7 @@ export const Formulario = ({setAnswers,setError}) => {
                 fifteenthValue.trim(),
             ];
             setAnswers(valores);
-        }else{
-            setError('Por favor, no deje preguntas en blanco')
+            setError('');
         }
     };
 
@@ -113,15 +114,15 @@ export const Formulario = ({setAnswers,setError}) => {
                             <input type="text" value={firstValue} onChange={(e)=>firstQuestion(e)} className={'textSpace'} placeholder='Escribe tu nombre' />
                             <p className={'question'}>¿Cual es tu genero?</p>
                             <div className={'questionOptions'} >
-                                Masculino<input type="radio" name="genero" value="Masculino" onChange={(e) => secondQuestion(e)} />
-                                Femenino<input type="radio" name="genero" value="Femenino" onChange={(e) => secondQuestion(e)} />
-                                Prefiero no decir<input type="radio" name="genero" value="Prefiero no decir" onChange={(e) => secondQuestion(e)} />
+                                Masculino<input type="radio" name="genero" value="Masculino" onChange={(e) => secondQuestion(e)} checked={secondValue=== 'Masculino'? true : false} />
+                                Femenino<input type="radio" name="genero" value="Femenino" onChange={(e) => secondQuestion(e)} checked={secondValue=== 'Femenino'? true : false} />
+                                Prefiero no decir<input type="radio" name="genero" value="Prefiero no decir" onChange={(e) => secondQuestion(e)} checked={secondValue=== 'Prefiero no decir'? true : false} />
                             </div>
                             <p className={'question'}>¿Cual es tu nivel academico?</p>
                             <div className={'questionOptions'} >
-                                Primario<input type="radio" name="grado" value="Primario" onChange={(e) => thirdQuestion(e)} />
-                                Medio<input type="radio" name="grado" value="Medio" onChange={(e) => thirdQuestion(e)} />
-                                Universitario<input type="radio" name="grado" value="Universitario" onChange={(e) =>thirdQuestion(e)} />
+                                Primario<input type="radio" name="grado" value="Primario" onChange={(e) => thirdQuestion(e)} checked={thirdValue=== 'Primario'? true : false} />
+                                Medio<input type="radio" name="grado" value="Medio" onChange={(e) => thirdQuestion(e)} checked={thirdValue=== 'Medio'? true : false} />
+                                Universitario<input type="radio" name="grado" value="Universitario" onChange={(e) =>thirdQuestion(e)} checked={thirdValue=== 'Universitario'? true : false} />
                             </div>
                             <h3 className={'pageNumber'}>Pagina 1</h3>
                         </div>
@@ -132,23 +133,23 @@ export const Formulario = ({setAnswers,setError}) => {
                         <div className={'questionSpace'}>
                             <p className={'question'}>¿Te gusta escuchar musica?</p>
                             <div className={'questionOptions'} >
-                                Si<input type="radio" name="escuchas" value="Si" onChange={(e) => fourthQuestion(e)} />
-                                No<input type="radio" name="escuchas" value="No" onChange={(e) => fourthQuestion(e)} />
-                                No lo se<input type="radio" name="escuchas" value="No lo se" onChange={(e) => fourthQuestion(e)} />
+                                Si<input type="radio" name="escuchas" value="Si" onChange={(e) => fourthQuestion(e)} checked={fourthValue=== 'Si'? true : false} />
+                                No<input type="radio" name="escuchas" value="No" onChange={(e) => fourthQuestion(e)} checked={fourthValue=== 'No'? true : false}/>
+                                No lo se<input type="radio" name="escuchas" value="No lo se" onChange={(e) => fourthQuestion(e)} checked={fourthValue=== 'No lo se'? true : false} />
                             </div>
                             <p className={'question'}>Si la tienes, ¿Cual es tu apliacion favorita para escuchar musica?</p>
                             <div className={'questionOptions'} >
-                                Spotify<input type="radio" name="app" value="Spotify" onChange={(e) => fifthQuestion(e)} />
-                                Deezer<input type="radio" name="app" value="Deezer" onChange={(e) => fifthQuestion(e)} />
-                                Apple Music<input type="radio" name="app" value="Apple Music" onChange={(e) => fifthQuestion(e)} />
-                                Youtube Music<input type="radio" name="app" value="Youtube Music" onChange={(e) => fifthQuestion(e)} />
+                                Spotify<input type="radio" name="app" value="Spotify" onChange={(e) => fifthQuestion(e)} checked={fifthValue=== 'Spotify'? true : false} />
+                                Deezer<input type="radio" name="app" value="Deezer" onChange={(e) => fifthQuestion(e)} checked={fifthValue=== 'Deezer'? true : false} />
+                                Apple Music<input type="radio" name="app" value="Apple Music" onChange={(e) => fifthQuestion(e)} checked={fifthValue=== 'Apple Music'? true : false} />
+                                Youtube Music<input type="radio" name="app" value="Youtube Music" onChange={(e) => fifthQuestion(e)} checked={fifthValue=== 'Youtube Music'? true : false} />
                             </div>
                             <p className={'question'}>¿Que tan frecuentemente escuchas musica?</p>
                             <div className={'questionOptions'} >
-                                Todos los dias<input type="radio" name="frecuente" value="Todos los dias" onChange={(e) => sixthQuestion(e)} />
-                                Varias veces a la semana<input type="radio" name="sistema" value="Varias veces a la semana" onChange={(e) => sixthQuestion(e)} />
-                                Una vez por semana<input type="radio" name="sistema" value="Una vez por semana" onChange={(e) => sixthQuestion(e)} />
-                                No suelo escuchar musica<input type="radio" name="sistema" value="No suelo escuchar musica" onChange={(e) => sixthQuestion(e)} />
+                                Todos los dias<input type="radio" name="frecuente" value="Todos los dias" onChange={(e) => sixthQuestion(e)} checked={sixthValue=== 'Todos los dias'? true : false} />
+                                Varias veces a la semana<input type="radio" name="sistema" value="Varias veces a la semana" onChange={(e) => sixthQuestion(e)} checked={sixthValue=== 'Varias veces a la semana'? true : false} />
+                                Una vez por semana<input type="radio" name="sistema" value="Una vez por semana" onChange={(e) => sixthQuestion(e)} checked={sixthValue=== 'Una vez por semana'? true : false} />
+                                No suelo escuchar musica<input type="radio" name="sistema" value="No suelo escuchar musica" onChange={(e) => sixthQuestion(e)} checked={sixthValue=== 'No suelo escuchar musica'? true : false} />
                             </div>
                             <h3 className={'pageNumber'}>Pagina 2</h3>
                         </div>
@@ -158,20 +159,20 @@ export const Formulario = ({setAnswers,setError}) => {
                         <div className={'questionSpace'}>
                             <p className={'question'}>¿Te gustaria aprender a hacer musica?</p>
                             <div className={'questionOptions'} >
-                                Si<input type="radio" name="hacer" value="Si" onChange={(e) => seventhQuestion(e)} />
-                                No<input type="radio" name="hacer" value="No" onChange={(e) => seventhQuestion(e)} />
-                                No lo se<input type="radio" name="hacer" value="No lo se" onChange={(e) => seventhQuestion(e)} />
+                                Si<input type="radio" name="hacer" value="Si" onChange={(e) => seventhQuestion(e)} checked={seventhValue=== 'Si'? true : false} />
+                                No<input type="radio" name="hacer" value="No" onChange={(e) => seventhQuestion(e)} checked={seventhValue=== 'No'? true : false} />
+                                No lo se<input type="radio" name="hacer" value="No lo se" onChange={(e) => seventhQuestion(e)} checked={seventhValue=== 'No lo se'? true : false} />
                             </div>
                             <p className={'question'}>¿Te gustaria aprender a tocar un instrumento?</p>
                             <div className={'questionOptions'} >
-                                Si<input type="radio" name="instrumento" value="Si" onChange={(e) => eighthQuestion(e)} />
-                                No<input type="radio" name="instrumento" value="No" onChange={(e) => eighthQuestion(e)} />
-                                No lo se<input type="radio" name="instrumento" value="No lo se" onChange={(e) => eighthQuestion(e)} />
+                                Si<input type="radio" name="instrumento" value="Si" onChange={(e) => eighthQuestion(e)} checked={eighthValue=== 'Si'? true : false} />
+                                No<input type="radio" name="instrumento" value="No" onChange={(e) => eighthQuestion(e)} checked={eighthValue=== 'No'? true : false} />
+                                No lo se<input type="radio" name="instrumento" value="No lo se" onChange={(e) => eighthQuestion(e)} checked={eighthValue=== 'No lo se'? true : false} />
                             </div>
                             <p className={'question'}>¿Has estado en una banda anteriormente?</p>
                             <div className={'questionOptions'} >
-                                Si<input type="radio" name="banda" value="Si" onChange={(e) => ninthQuestion(e)} />
-                                No<input type="radio" name="banda" value="No" onChange={(e) => ninthQuestion(e)} />
+                                Si<input type="radio" name="banda" value="Si" onChange={(e) => ninthQuestion(e)} checked={ninthValue=== 'Si'? true : false} />
+                                No<input type="radio" name="banda" value="No" onChange={(e) => ninthQuestion(e)} checked={ninthValue=== 'No'? true : false} />
                             </div>
                             <h3 className={'pageNumber'}>Pagina 3</h3>
                         </div>
@@ -181,20 +182,20 @@ export const Formulario = ({setAnswers,setError}) => {
                         <div className={'questionSpace'}>
                             <p className={'question'}>¿Te gustaria escribir la letra de una cancion?</p>
                             <div className={'questionOptions'} >
-                                Si<input type="radio" name="letra" value="Si" onChange={(e) => tenthQuestion(e)} />
-                                No<input type="radio" name="letra" value="No" onChange={(e) => tenthQuestion(e)} />
-                                No lo se<input type="radio" name="letra" value="No lo se" onChange={(e) => tenthQuestion(e)} />
+                                Si<input type="radio" name="letra" value="Si" onChange={(e) => tenthQuestion(e)} checked={tenthValue=== 'Si'? true : false} />
+                                No<input type="radio" name="letra" value="No" onChange={(e) => tenthQuestion(e)} checked={tenthValue=== 'No'? true : false} />
+                                No lo se<input type="radio" name="letra" value="No lo se" onChange={(e) => tenthQuestion(e)} checked={tenthValue=== 'No lo se'? true : false} />
                             </div>
                             <p className={'question'}>¿Te gusta ir a conciertos?</p>
                             <div className={'questionOptions'} >
-                                Si<input type="radio" name="concierto" value="Si" onChange={(e) => eleventhQuestion(e)} />
-                                No<input type="radio" name="concierto" value="No" onChange={(e) => eleventhQuestion(e)} />
-                                Nunca lo he hecho<input type="radio" name="concierto" value="Nunca lo he hecho" onChange={(e) => eleventhQuestion(e)} />
+                                Si<input type="radio" name="concierto" value="Si" onChange={(e) => eleventhQuestion(e)} checked={eleventhValue=== 'Si'? true : false} />
+                                No<input type="radio" name="concierto" value="No" onChange={(e) => eleventhQuestion(e)} checked={eleventhValue=== 'No'? true : false} />
+                                Nunca lo he hecho<input type="radio" name="concierto" value="Nunca lo he hecho" onChange={(e) => eleventhQuestion(e)} checked={eleventhValue=== 'Nunca lo he hecho'? true : false} />
                             </div>
                             <p className={'question'}>¿Sueles escuchar podcasts?</p>
                             <div className={'questionOptions'} >
-                                Si<input type="radio" name="podcast" value="Si" onChange={(e) => twelfthQuestion(e)} />
-                                No<input type="radio" name="podcast" value="No" onChange={(e) => twelfthQuestion(e)} />
+                                Si<input type="radio" name="podcast" value="Si" onChange={(e) => twelfthQuestion(e)} checked={twelfthValue=== 'Si'? true : false} />
+                                No<input type="radio" name="podcast" value="No" onChange={(e) => twelfthQuestion(e)} checked={twelfthValue=== 'No'? true : false} />
                             </div>
                             <h3 className={'pageNumber'}>Pagina 4</h3>
                         </div>
@@ -204,8 +205,8 @@ export const Formulario = ({setAnswers,setError}) => {
                         <div className={'questionSpace'}>
                             <p className={'question'}>¿Te gusta escuchar musica mientras trabajas?</p>
                             <div className={'questionOptions'} >
-                                Si<input type="radio" name="trabajas" value="Si" onChange={(e) => thirteenthQuestion(e)} />
-                                No<input type="radio" name="trabajas" value="No" onChange={(e) => thirteenthQuestion(e)} />
+                                Si<input type="radio" name="trabajas" value="Si" onChange={(e) => thirteenthQuestion(e)} checked={thirteenthValue=== 'Si'? true : false} />
+                                No<input type="radio" name="trabajas" value="No" onChange={(e) => thirteenthQuestion(e)} checked={thirteenthValue=== 'No'? true : false} />
                             </div>
                             <p className={'question'}>¿Cual es el genero musical que mas te gusta?</p>
                                 <input type="text" value={fourteenthValue} onChange={(e) => fourteenthQuestion(e)} className={'textSpace'}  placeholder='Escribe el nombre de tu genero favorito'/>

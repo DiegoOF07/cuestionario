@@ -8,9 +8,9 @@ export function App() {
 
   return (
     <>
-      {answers.length<1?
+      {answers.length<1 && error==='' ?
         <Formulario setAnswers={setAnswers} setError={setError}/>
-        : <InfoPantalla answers={answers} setAnswers={setAnswers}/>
+        : <InfoPantalla answers={answers} setAnswers={setAnswers} error={error} setError={setError}/>
       }
     </>
   )
