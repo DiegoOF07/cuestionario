@@ -78,7 +78,7 @@ export const Formulario = ({setAnswers,setError}) => {
     const submit = (e) => {
         e.preventDefault();
         if(firstValue==='' || fourteenthValue==='' || fifteenthValue===''){
-            setError('Por favor, no deje preguntas en blanco');
+            setError('No puedes dejar preguntas en blanco');
         }else{
             let valores = [
                 firstValue.trim(),

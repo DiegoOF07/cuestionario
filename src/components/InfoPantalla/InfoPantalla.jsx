@@ -4,6 +4,10 @@ export const InfoPantalla = ({ answers, setAnswers, error, setError }) => {
   const regresar = () => {
     setError('');
   };
+  const limpiar = ()=>{
+    setAnswers([]);
+    setError('');
+  }
 
   return (
     <>
@@ -17,21 +21,26 @@ export const InfoPantalla = ({ answers, setAnswers, error, setError }) => {
             <p><b>¿Te gusta escuchar musica?:</b> {answers[3]}</p>
             <p><b>Si la tienes, ¿Cual es tu apliacion favorita para escuchar musica?:</b> {answers[4]}</p>
             <p><b>¿Que tan frecuentemente escuchas musica?:</b> {answers[5]}</p>
-            <p>¿Te gustaria aprender a hacer musica?: {answers[6]}</p>
-            <p>¿Te gustaria aprender a tocar un instrumento?: {answers[7]}</p>
-            <p>¿Has estado en una banda anteriormente?: {answers[8]}</p>
-            <p>¿Te gustaria escribir la letra de una cancion?: {answers[9]}</p>
-            <p>¿Te gusta ir a conciertos?: {answers[10]}</p>
-            <p>¿Sueles escuchar podcasts?: {answers[11]}</p>
-            <p>¿Te gusta escuchar musica mientras trabajas?: {answers[12]}</p>
-            <p>¿Cual es el genero musical que mas te gusta?: {answers[13]}</p>
-            <p>¿Cual es tu artista favorito?: {answers[14]}</p>
+            <p><b>¿Te gustaria aprender a hacer musica?:</b> {answers[6]}</p>
+            <p><b>¿Te gustaria aprender a tocar un instrumento?:</b> {answers[7]}</p>
+            <p><b>¿Has estado en una banda anteriormente?:</b>{answers[8]}</p>
+            <p><b>¿Te gustaria escribir la letra de una cancion?:</b> {answers[9]}</p>
+            <p><b>¿Te gusta ir a conciertos?:</b> {answers[10]}</p>
+            <p><b>¿Sueles escuchar podcasts?:</b> {answers[11]}</p>
+            <p><b>¿Te gusta escuchar musica mientras trabajas?:</b> {answers[12]}</p>
+            <p><b>¿Cual es el genero musical que mas te gusta?:</b> {answers[13]}</p>
+            <p><b>¿Cual es tu artista favorito?:</b> {answers[14]}</p>
+            <div className='btn-group'>
+              <button className='btn'  onClick={limpiar}>Ver cuestionario</button>
+            </div>
           </div>
         </div>
         : <div className='container'>
           <div className='card'>
-            <h2 className='title'>{error}</h2>
+            <h2 className='title'>{error}</h2><br />
+            <div className='btn-group'>
             <button className='btn' onClick={regresar}>Entendido</button>
+            </div>
           </div>
         </div>
       }
