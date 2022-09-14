@@ -4,9 +4,8 @@ import { config } from '../../config/questions.config';
 import './form.modules.css';
 
 
-export const Formulario = ({ setAnswers, setError }) => {
+export const Formulario = ({ setAnswers }) => {
   const [page, setPage] = useState(1);
-  const [respuesta, setRespuesta] = useState("");
   const [form, setForm] = useState({});
 
   useEffect(() => {
@@ -14,7 +13,7 @@ export const Formulario = ({ setAnswers, setError }) => {
 
     config.questions.forEach((question) => {
       newState[question.code] = {
-        value: "",
+        value: '',
         ...question,
       };
     });
@@ -22,13 +21,14 @@ export const Formulario = ({ setAnswers, setError }) => {
     setForm(newState);
   }, []);
 
-  // const tomarValores = (e) => {
-  //   let respuestas = [];
-  //   setRespuesta(e.target.value);
-  //   respuestas = [...respuestas, respuesta];
-  //   console.log(respuestas);
-  // };
-  //funcion para obtener values
+  const getValues = (e, code) => {
+
+    setForm({
+      ...form,[code]:{
+        ...form[code], value: e.target.value
+      }
+    });
+  };
 
   const nextPage = (e) => {
     
@@ -42,7 +42,11 @@ export const Formulario = ({ setAnswers, setError }) => {
     if (page > 1) setPage(page - 1);
   };
 
-  const submit = (e) => {};
+  const submit = (e) => {
+    
+    e.preventDefault();
+    setAnswers(form);
+  };
 
   return (
     <div className = "container">
@@ -54,8 +58,10 @@ export const Formulario = ({ setAnswers, setError }) => {
               {formElement.page === page 
               ? (
                 <div className = "questionSpace">
-                  <label htmlFor = {formElement.code} className = "question">
-                    {formElement.question}
+                  <label 
+                    htmlFor = {formElement.code} 
+                    className = "question">
+                      {formElement.question}
                   </label>
                   <input
                     id = {formElement.code}
@@ -63,6 +69,8 @@ export const Formulario = ({ setAnswers, setError }) => {
                     type = {formElement.type}
                     placeholder = {formElement.placeholder}
                     className = "textSpace"
+                    value = {formElement.value}
+                    onChange = {(e)=>getValues(e, formElement.code)}
                   />
                 </div>
               ) : null}
@@ -72,20 +80,27 @@ export const Formulario = ({ setAnswers, setError }) => {
           <div className = {"btn-group"}>
             {page > 1 
             ? (
-              <button className = {"btn"} onClick = {(e) => previousPage(e)}>
-                Anterior
+              <button 
+                className = {"btn"} 
+                onClick = {(e) => previousPage(e)}>
+                  Anterior
               </button>
             ) : null}
             {page < 5 
             ? (
-              <button className = {"btn"} onClick = {(e) => nextPage(e)}>
-                Siguiente
+              <button 
+                className = {"btn"} 
+                onClick = {(e) => nextPage(e)}>
+                  Siguiente
               </button>
             ) : null}
             {page === 5 
             ? (
-              <button className = {"btn"} onClick = {(e) => submit(e)}>
-                Enviar
+              <button 
+                type = "submit" 
+                className = {"btn"} 
+                onClick = {(e) => submit(e)}>
+                  Enviar
               </button>
             ) : null}
           </div>

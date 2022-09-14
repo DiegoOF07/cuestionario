@@ -1,63 +1,43 @@
-import React, { useState, useEffect } from 'react';
+import './info.modules.css'
 
-import {config} from '../../config/questions.config'
-
-
-export const InfoPantalla = ({ answers, setAnswers, error, setError }) => {
-
-  const [form, setForm] = useState({});
-
-  useEffect(() => {
-    const newState = {};
-
-    config.questions.forEach((question,i) => {
-      newState[question.code] = {
-        value: answers[i],
-        ...question,
-      };
-    });
-
-    setForm(newState);
-  }, []);
-
-  const regresar = () => {
-
-    setError('');
-  };
+export const InfoPantalla = ({ answers, setAnswers }) => {
   const limpiar = () => {
-
-    setAnswers([]);
-    setError('');
+    setAnswers({});
   };
 
   return (
     <>
-      {error === "" 
-      ? (
-        <div className = "container">
-          <div className = "card">
-            <h2 className = "title">Tus resultados</h2>
-
-            <div className = "btn-group">
-              <button className = "btn" onClick = {limpiar}>
-                Ver cuestionario
-              </button>
+      <div className="container">
+        <div className="card">
+          <h2 className="title">Tus resultados</h2>
+          {Object.values(answers).map(formElement=>(
+            <div 
+              className = "questionSpace" 
+              key = {formElement.code}>
+                <label 
+                  htmlFor = {formElement.code} 
+                  className = "question">
+                    {formElement.question}
+                </label>
+                <input
+                  id = {formElement.code}
+                  key = {formElement.code}
+                  type = {formElement.type}
+                  className = "textSpace"
+                  value = {formElement.value}
+                  readOnly = {true}
+                />
             </div>
+          ))}
+          <div className = "btn-group">
+            <button 
+              className = "btn" 
+              onClick = {limpiar}>
+                Enviar otra respuesta
+            </button>
           </div>
         </div>
-      ) : (
-        <div className = "container">
-          <div className = "card">
-            <h2 className = "title">{error}</h2>
-            <br />
-            <div className = "btn-group">
-              <button className = "btn" onClick = {regresar}>
-                Entendido
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      </div>
     </>
   );
 };

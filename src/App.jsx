@@ -4,20 +4,17 @@ import { InfoPantalla } from './components/InfoPantalla/InfoPantalla';
 
 export function App() {
 
-  const [answers, setAnswers] = useState([]);
-  const [error, setError] = useState('');
+  const [answers, setAnswers] = useState({});
 
   return (
     <>
-      {answers.length < 1 && error === "" 
+      {Object.values(answers).length<1 
       ? (
-        <Formulario setAnswers={setAnswers} setError={setError} />
+        <Formulario setAnswers={setAnswers} />
       ) : (
         <InfoPantalla
           answers={answers}
           setAnswers={setAnswers}
-          error={error}
-          setError={setError}
         />
       )}
     </>
